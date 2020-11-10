@@ -7,7 +7,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: {{ template "service-sample.name" . }}
+      app: aspnetapp
       release: {{ .Release.Name }}
     spec:
       containers:
