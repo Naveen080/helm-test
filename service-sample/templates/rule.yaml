@@ -1,0 +1,31 @@
+{{ if .Values.prometheusRules.enable }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ template "service-sample.fullname" . }}
+  labels:
+    app: {{ template "service-sample.name" . }}
+    chart: {{ template "service-sample.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    prometheus: es-kube-prometheus
+    role: alert-rules
+    {{- if .Values.additionalRulesLabels }}
+{{ toYaml .Values.additionalRulesLabels | indent 4 }}
+    {{- end }}
+spec:
+  groups:
+  - name: hello.rules
+    rules:
+    - alert: HelloExampleRule
+      expr: up{name="{{ template "service-sample.fullname" . }}"} < 0
+      for: 1m
+      labels:
+        solution: enablement
+        app: {{ template "service-sample.name" . }}
+        severity: critical
+      annotations:
+        description: '{{`{{ $labels.namespace }}`}} Examaple Prometheus rule for creating an alert. Value of metrics query {{`{{ $value | printf "%.2f" }}`}}'
+        summary: Examaple Prometheus rule
+        runbook: https://smartractechnology.atlassian.net/wiki/spaces/SES/pages/449445889/HelloRule
+{{ end }}
