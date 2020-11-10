@@ -1,0 +1,16 @@
+apiVersion: skaffold/v1beta11
+kind: Config
+
+build:
+  artifacts:
+    - image: service-sample
+      context: .
+ deploy:
+  helm:
+    releases:
+      - name: service-sample
+        chartPath: service-sample
+        
+        values:
+          image: service-sample
+        namespace: sc-local
