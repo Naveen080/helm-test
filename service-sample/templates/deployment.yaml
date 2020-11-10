@@ -5,9 +5,14 @@ metadata:
   labels:
     app: aspnetapp
 spec:
-  containers:
-  - image: "mcr.microsoft.com/dotnet/core/samples:aspnetapp"
-    name: aspnetapp-image
-    ports:
-    - containerPort: 80
-      protocol: TCP
+  selector:
+    matchLabels:
+      app: {{ template "service-sample.name" . }}
+      release: {{ .Release.Name }}
+    spec:
+      containers:
+        - image: "mcr.microsoft.com/dotnet/core/samples:aspnetapp"
+           name: aspnetapp-image
+           ports:
+           - containerPort: 80
+             protocol: TCP
