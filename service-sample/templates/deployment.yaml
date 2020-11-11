@@ -8,12 +8,12 @@ spec:
   selector:
     matchLabels:
       app: aspnetapp
-      release: aspnetapp1
+      release: {{ .Release.Name }}
     template:
       metadata:
         labels:
           app: aspnetapp   
-          release: aspnetapp1
+          release: {{ .Release.Name }}
       spec:
         containers:
           - name: aspnetapp-image
