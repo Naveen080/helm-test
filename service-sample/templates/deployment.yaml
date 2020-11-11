@@ -10,14 +10,14 @@ spec:
       app: aspnetapp
       release: aspnetapp1
    template:
-    metadata:
-      labels:
-        app: aspnetapp   
-        release: aspnetapp1
-    spec:
-      containers:
-        - name: aspnetapp-image
-          image: mcr.microsoft.com/dotnet/core/samples:aspnetapp
-          ports:
-            - containerPort: 80
-              protocol: TCP
+     metadata:
+       labels:
+         app: aspnetapp   
+         release: aspnetapp1
+     spec:
+       containers:
+         - name: aspnetapp-image
+           image: mcr.microsoft.com/dotnet/core/samples:aspnetapp
+           ports:
+             - containerPort: 80
+               protocol: TCP
