@@ -8,12 +8,10 @@ spec:
   selector:
     matchLabels:
       app: aspnetapp
-      
    template:
     metadata:
       labels:
-        app: aspnetapp
-        
+        app: aspnetapp   
     spec:
       containers:
         - name: aspnetapp-image
